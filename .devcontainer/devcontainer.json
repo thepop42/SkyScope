@@ -1,0 +1,48 @@
+{
+	"name": "Python 3",
+	"hostRequirements": {
+		"cpus": 4,
+		"memory": "16gb",
+		"storage": "32gb"
+	},
+	"build": {
+		"dockerfile": "./Dockerfile",
+		"context": ".."
+	},
+	"customizations": {
+		"vscode": {
+		  "extensions": [
+			"GitHub.vscode-pull-request-github",
+			"ms-azuretools.vscode-docker",
+			"github.vscode-github-actions",
+			"ms-python.python",
+			"esbenp.prettier-vscode",
+			"ms-python.flake8",
+			"ms-python.black-formatter",
+			"ms-python.mypy-type-checker",
+			"ms-python.pylint",
+			"ms-python.vscode-pylance",
+			"ms-vsliveshare.vsliveshare",
+			"ms-playwright.playwright",
+			"GitHub.copilot-chat",
+			"GitHub.copilot",
+			"pomdtr.excalidraw-editor"
+		  ]
+		}
+	  },
+	"postAttachCommand": "python3 run.py"
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
