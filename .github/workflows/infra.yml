@@ -23,17 +23,18 @@ jobs:
         - name: Setup Terraform
           uses: hashicorp/setup-terraform@v1
 
-        - name: Change to infrastructure directory
-          run: cd infrastructure
-
         - name: Terraform Init
           run: terraform init
+          working-directory: infrastructure
 
         - name: Terraform Validate
           run: terraform validate
+          working-directory: infrastructure
 
         - name: Terraform Plan
           run: terraform plan
+          working-directory: infrastructure
 
         - name: Terraform Apply
           run: terraform apply -auto-approve
+          working-directory: infrastructure
