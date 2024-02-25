@@ -45,7 +45,7 @@ jobs:
             pip install -r requirements.txt
 
         - name: Zip the application files
-          run: Compress-Archive ./* app.zip
+          run: zip -r app.zip ./*
 
         - name: Login to Azure
           uses: azure/login@v1
