@@ -12,10 +12,14 @@ resource "azurerm_app_service_plan" "example" {
     location            = azurerm_resource_group.example.location
     resource_group_name = azurerm_resource_group.example.name
 
+    kind = "Linux"
+
     sku {
         tier = "Standard"
         size = "S1"
     }
+
+    reserved = true # Required for Linux plan
 }
 
 resource "azurerm_app_service" "example" {
@@ -25,7 +29,7 @@ resource "azurerm_app_service" "example" {
     app_service_plan_id = azurerm_app_service_plan.example.id
 
     site_config {
-        python_version = "3.4"
+        linux_fx_version = "PYTHON|3.12" # Set Python version to 3.12
     }
 
     app_settings = {
