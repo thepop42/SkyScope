@@ -1,10 +1,14 @@
 name: Deploy
 on:
-    workflow_dispatch:
+    workflow_run:
+        workflows: ["Build"]
+        types:
+            - completed
 
 jobs:
     deploy:
         runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         steps:
         - name: Checkout code
           uses: actions/checkout@v2
@@ -12,8 +16,18 @@ jobs:
         - name: Download artifact
           uses: actions/download-artifact@v2
           with:
-            name: app-artifact
-            path: ./app
+                name: app-artifact
+                path: ./app
+
+        - name: Set up Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.x'
+
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
 
         - name: Login to Azure
           uses: azure/login@v1
