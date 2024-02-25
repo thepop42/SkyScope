@@ -27,14 +27,23 @@ jobs:
           run: python -m unittest discover tests
 
     Publish:
-        needs: test
+        needs: Test
         runs-on: ubuntu-latest
         steps:
         - name: Checkout code
           uses: actions/checkout@v2
 
-        - name: Publish artifacts
-          uses: actions/upload-artifact@v4
+        - name: Build artifact
+          run: |
+            # Replace these commands with the commands you use to build your application
+            echo "Building application..."
+            mkdir app-artifact
+            cp -r ./app ./app-artifact/app
+            cp ./requirements.txt ./app-artifact
+            cp ./run.py ./app-artifact
+
+        - name: Upload artifact
+          uses: actions/upload-artifact@v2
           with:
             name: app-artifact
-            path: ./app/**
+            path: ./app-artifact
