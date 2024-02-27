@@ -12,6 +12,8 @@ class TestViews(unittest.TestCase):
         self.assertEqual(result.status_code, 200)
 
     def test_index_post(self):
-        response = self.app.post('/', data={'city': 'London'})
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'London', response.data)
+        cities = ['London', 'Paris', 'New York', 'Tokyo', 'Sydney']
+        for city in cities:
+            response = self.app.post('/', data={'city': city})
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(bytes(city, 'utf-8'), response.data)
