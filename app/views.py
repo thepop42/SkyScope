@@ -1,6 +1,9 @@
 from flask import render_template, request
 from . import app
 import requests
+import os
+
+OPENWEATHER_API_KEY = os.environ.get('OPENWEATHER_APPID')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -9,7 +12,7 @@ def index():
     if request.method == 'POST':
         city = request.form['city']
 
-        url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid=b5268fcd2ca37ab2198170fac2825453'
+        url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPENWEATHER_API_KEY}'
 
         response = requests.get(url).json()
 
